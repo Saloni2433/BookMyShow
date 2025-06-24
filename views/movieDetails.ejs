@@ -1,0 +1,315 @@
+<link rel="stylesheet" href="/css/movieDetails.css">
+
+<!-- Movie Details Modal -->
+<div class="movie-details-modal">
+    <div class="movie-details-content">
+        <div class="movie-details-header">
+            <img src="" alt="" class="movie-details-backdrop">
+            <button class="movie-details-close">&times;</button>
+            <div class="movie-details-info">
+                <h2 class="movie-details-title"></h2>
+                <div class="movie-details-meta">
+                    <div class="movie-details-rating"></div>
+                    <div class="movie-details-duration"></div>
+                    <div class="movie-details-language"></div>
+                </div>
+            </div>
+        </div>
+        <div class="movie-details-body">
+            <div class="movie-details-section">
+                <h3>Overview</h3>
+                <p class="movie-details-description"></p>
+            </div>
+            <div class="movie-details-section">
+                <h3>Show Times</h3>
+                <div class="movie-details-showtimes"></div>
+            </div>
+        </div>
+        <div class="movie-details-actions">
+            <button class="book-ticket-btn">Book Tickets</button>
+        </div>
+    </div>
+</div>
+
+<style>
+    .movie-details-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: none;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .movie-details-modal.active {
+        display: flex;
+        opacity: 1;
+    }
+
+    .movie-details-content {
+        background: #fff;
+        width: 90%;
+        max-width: 700px;
+        max-height: 80vh;
+        border-radius: 16px;
+        overflow: hidden;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .movie-details-header {
+        position: relative;
+        height: 300px;
+        overflow: hidden;
+    }
+
+    .movie-details-backdrop {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(0.7);
+    }
+
+    .movie-details-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 40px;
+        height: 40px;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        cursor: pointer;
+        border: none;
+        font-size: 24px;
+        transition: all 0.3s ease;
+        z-index: 2;
+    }
+
+    .movie-details-close:hover {
+        background: #e71a0f;
+        transform: rotate(90deg);
+    }
+
+    .movie-details-info {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 30px;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+        color: #fff;
+    }
+
+    .movie-details-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .movie-details-meta {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .movie-details-rating {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+
+    .movie-details-rating::before {
+        content: "★";
+        color: #ffd700;
+    }
+
+    .movie-details-duration,
+    .movie-details-language {
+        font-size: 1.1rem;
+        opacity: 0.9;
+    }
+
+    .movie-details-body {
+        padding: 30px;
+        overflow-y: auto;
+        max-height: calc(90vh - 400px);
+    }
+
+    .movie-details-section {
+        margin-bottom: 25px;
+    }
+
+    .movie-details-section h3 {
+        font-size: 1.3rem;
+        color: #222;
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+
+    .movie-details-description {
+        color: #444;
+        line-height: 1.6;
+        font-size: 1.1rem;
+    }
+
+    .movie-details-showtimes {
+        display: flex;
+        gap: 10px;
+        overflow-x: auto;
+        padding-bottom: 10px;
+    }
+
+    .showtime {
+        text-align: center;
+        min-width: 120px;
+    }
+
+    .showtime-time {
+        font-weight: 500;
+        color: #222;
+    }
+
+    .movie-details-actions {
+        padding: 20px 30px;
+        background: #f8f8f8;
+        border-top: 1px solid #eee;
+        display: flex;
+        gap: 15px;
+    }
+
+    .book-ticket-btn {
+        background: #e71a0f;
+        color: #fff;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 8px;
+        font-size: 1.1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        flex: 1;
+    }
+
+    .book-ticket-btn:hover {
+        background: #b31309;
+        transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+        .movie-details-content {
+            width: 95%;
+        }
+
+        .movie-details-header {
+            height: 300px;
+        }
+
+        .movie-details-title {
+            font-size: 2rem;
+        }
+
+        .movie-details-meta {
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .movie-details-body {
+            padding: 20px;
+        }
+
+        .movie-details-actions {
+            flex-direction: column;
+            padding: 15px 20px;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const movieCards = document.querySelectorAll('.movie-card');
+        const modal = document.querySelector('.movie-details-modal');
+        const closeBtn = document.querySelector('.movie-details-close');
+        const modalTitle = document.querySelector('.movie-details-title');
+        const modalRating = document.querySelector('.movie-details-rating');
+        const modalBackdrop = document.querySelector('.movie-details-backdrop');
+        const modalDescription = document.querySelector('.movie-details-description');
+        const modalDuration = document.querySelector('.movie-details-duration');
+        const modalLanguage = document.querySelector('.movie-details-language');
+        const modalShowtimes = document.querySelector('.movie-details-showtimes');
+
+        function openMovieDetails(movie) {
+            const title = movie.querySelector('.movie-title').textContent;
+            const rating = movie.querySelector('.movie-rating').textContent;
+            const poster = movie.querySelector('.movie-poster').src;
+            const description = movie.dataset.description;
+            const duration = movie.dataset.duration;
+            const language = movie.dataset.language;
+            const showTimes = JSON.parse(movie.dataset.showtimes || '[]');
+
+            modalTitle.textContent = title;
+            modalRating.textContent = rating;
+            modalBackdrop.src = poster;
+            modalDescription.textContent = description;
+            modalDuration.textContent = duration;
+            modalLanguage.textContent = language;
+
+            // Clear previous showtimes
+            modalShowtimes.innerHTML = '';
+
+            // Populate showtimes
+            if (showTimes.length > 0) {
+                showTimes.forEach(showtime => {
+                    const showtimeDiv = document.createElement('div');
+                    showtimeDiv.classList.add('showtime');
+                    showtimeDiv.innerHTML = `
+                        <div class="showtime-time">${showtime.time}</div>
+                        <div class="showtime-seats">${showtime.seats} seats</div>
+                    `;
+                    modalShowtimes.appendChild(showtimeDiv);
+                });
+            } else {
+                modalShowtimes.innerHTML = '<p>No showtimes available.</p>';
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMovieDetails() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        movieCards.forEach(card => {
+            card.addEventListener('click', () => openMovieDetails(card));
+        });
+
+        closeBtn.addEventListener('click', closeMovieDetails);
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeMovieDetails();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeMovieDetails();
+            }
+        });
+    });
+</script>
